@@ -8,7 +8,7 @@ const Order = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const url = `http://localhost:5000/order?email=${user.email}`;
+    const url = `https://obscure-inlet-14741.herokuapp.com/order?email=${user.email}`;
     const findOrers = async () => {
       const getOrder = await axios.get(url);
       setOrders(getOrder.data);

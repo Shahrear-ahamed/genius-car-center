@@ -6,7 +6,7 @@ const ManageService = () => {
   const deleteServide = (id) => {
     const procced = window.confirm("Are sure?");
     if (procced) {
-      const url = `http://localhost:5000/service/${id}`;
+      const url = `https://obscure-inlet-14741.herokuapp.com/service/${id}`;
       fetch(url, {
         method: "DELETE",
       })

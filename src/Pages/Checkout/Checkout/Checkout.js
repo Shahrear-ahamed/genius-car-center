@@ -35,7 +35,7 @@ const Checkout = () => {
       address: e.target.address.value,
       mobile: e.target.mobile.value,
     };
-    axios.post("http://localhost:5000/order", order).then((res) => {
+    axios.post("https://obscure-inlet-14741.herokuapp.com/order", order).then((res) => {
       const { data } = res;
       if (data.insertedId) {
         toast.success("Your order is book!!");

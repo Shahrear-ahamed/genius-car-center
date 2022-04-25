@@ -16,8 +16,15 @@ const Order = () => {
     findOrers();
   }, [user]);
   return (
-    <div>
+    <div className="w-50 my-4 mx-auto">
       <h2>Your total orders {orders.length}</h2>
+      <div>
+        {orders.map((order) => (
+          <p key={order._id}>
+            {user.email} product is {order.service}
+          </p>
+        ))}
+      </div>
     </div>
   );
 };

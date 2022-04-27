@@ -1,6 +1,8 @@
 import axios from "axios";
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 
 const Order = () => {
@@ -9,9 +11,21 @@ const Order = () => {
 
   useEffect(() => {
     const url = `https://obscure-inlet-14741.herokuapp.com/order?email=${user.email}`;
+    // const url = `http://localhost:5000/order?email=${user.email}`;
     const findOrers = async () => {
-      const getOrder = await axios.get(url);
-      setOrders(getOrder.data);
+      try {
+        const getOrder = await axios.get(url, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        });
+        setOrders(getOrder.data);
+      } catch (error) {
+        if (error.response.status === 401 || error.response.status === 403) {
+          signOut(auth);
+          toast.error("forbidden access");
+        }
+      }
     };
     findOrers();
   }, [user]);
